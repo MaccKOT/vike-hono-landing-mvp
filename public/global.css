@@ -3,17 +3,27 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* высота хедера, чтобы якорь не прятался под ним */
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
 /* Prose-стили для markdown-вставок внутри блоков (если bodyHtml рендерится) */
-.prose-slate p { line-height: 1.7; }
-.prose-slate strong { color: rgb(15 23 42); }
+.prose-slate p {
+  line-height: 1.7;
+}
+.prose-slate strong {
+  color: rgb(15 23 42);
+}
 
 /* Скрываем scrollbar в аккордеонах, если будет */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}

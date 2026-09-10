@@ -1,60 +1,69 @@
-import type { HeroBlock as HeroBlockType } from '../../server/types'
+import type { HeroBlock as HeroBlockType } from "../../server/types";
+
+const HERO_IMAGE_URL =
+  "https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
 export function Hero({ block }: { block: HeroBlockType }) {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-indigo-600 via-violet-600 to-purple-700 text-white">
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute -top-20 -left-20 w-80 h-80 bg-pink-400 rounded-full blur-3xl" />
-        <div className="absolute -bottom-32 -right-20 w-96 h-96 bg-cyan-300 rounded-full blur-3xl" />
-      </div>
-
-      <div className="relative max-w-6xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-10 items-center">
-        <div>
-          {block.badge && (
-            <span className="inline-block px-3 py-1 mb-5 text-xs font-semibold tracking-wider uppercase rounded-full bg-white/10 backdrop-blur border border-white/20">
-              {block.badge}
-            </span>
-          )}
-          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
-            {block.title}
-          </h1>
-          <p className="mt-5 text-lg md:text-xl text-white/85 max-w-xl">
-            {block.subtitle}
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <a
-              href={block.ctaLink}
-              className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-white text-indigo-700 font-semibold shadow-lg shadow-indigo-900/30 hover:bg-slate-100 transition"
-            >
-              {block.ctaText}
-              <span className="ml-2">→</span>
-            </a>
-            {block.secondaryCtaText && (
-              <a
-                href="#program"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-xl border border-white/40 text-white font-semibold hover:bg-white/10 transition"
-              >
-                {block.secondaryCtaText}
-              </a>
+    <section className="py-24 md:py-20 bg-gradient-to-b from-slate-50 to-white">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            {block.badge && (
+              <span className="inline-block px-4 py-1.5 mb-6 text-sm font-semibold text-indigo-700 bg-indigo-50 rounded-full border border-indigo-200">
+                {block.badge}
+              </span>
             )}
-          </div>
-        </div>
 
-        <div className="relative">
-          <div className="aspect-square max-w-md mx-auto rounded-3xl bg-white/10 backdrop-blur border border-white/20 p-6 shadow-2xl">
-            <div className="grid grid-cols-3 gap-3 h-full">
-              {['💻', '⚛️', '🚀', '🧠', '🛠️', '🎯', '📊', '🔒', '✨'].map((emoji, i) => (
-                <div
-                  key={i}
-                  className="rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center text-3xl"
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 leading-tight">
+              {block.title}
+            </h1>
+
+            <p className="mt-6 text-lg text-slate-600 leading-relaxed max-w-xl">
+              {block.subtitle}
+            </p>
+
+            <div className="mt-10 flex flex-wrap gap-4">
+              <a
+                href={block.ctaLink}
+                className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-indigo-600 text-white font-semibold shadow-lg shadow-indigo-600/20 hover:bg-indigo-700 hover:shadow-xl hover:shadow-indigo-600/30 transition-all"
+              >
+                {block.ctaText}
+                <span className="ml-2 text-xl">→</span>
+              </a>
+
+              {block.secondaryCtaText && (
+                <a
+                  href="#program"
+                  className="inline-flex items-center justify-center px-8 py-4 rounded-xl bg-white border-2 border-slate-200 text-slate-700 font-semibold hover:border-indigo-300 hover:text-indigo-700 transition-all"
                 >
-                  {emoji}
-                </div>
-              ))}
+                  {block.secondaryCtaText}
+                </a>
+              )}
+            </div>
+          </div>
+
+          <div className="relative">
+            {/* Container owns the geometry: fixed ratio + overflow clip.
+                Any native image ratio is cropped, never stretches the block. */}
+            <div className="relative aspect-[4/3] w-full max-w-lg mx-auto overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-2xl">
+              {/* Fallback layer: visible while loading and if hotlink dies */}
+              <div className="absolute inset-0 flex items-center justify-center text-slate-400 text-sm">
+                [Иллюстрация]
+              </div>
+              <img
+                src={HERO_IMAGE_URL}
+                alt="Ноутбук и блокнот на рабочем столе"
+                width={1200}
+                height={900}
+                fetchPriority="high"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
